@@ -1,0 +1,15 @@
+{
+  "name": "liqe-to-sql",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "liqe": "^3.6.1",
+    "sql-template-tag": "^5.1.0"
+  }
+}
