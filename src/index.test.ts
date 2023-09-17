@@ -86,9 +86,13 @@ test(`name.first:foo`, () =>
 
 // search using regex
 test(`name:/foo/`, () =>
-  expect(() => serialize(parse(`name:/foo/`))).toThrow());
+  expect(() => serialize(parse(`name:/foo/`))).toThrow(
+    "Unsupported RegexExpression"
+  ));
 test(`name:/foo/i`, () =>
-  expect(() => serialize(parse(`name:/foo/i`))).toThrow());
+  expect(() => serialize(parse(`name:/foo/i`))).toThrow(
+    "Unsupported RegexExpression"
+  ));
 
 // search using wildcard
 test(`name:foo*bar`, () =>
@@ -175,3 +179,6 @@ test(`name:foo AND (bio:bar OR bio:baz)`, () =>
   expect(serialize(parse(`name:foo AND (bio:bar OR bio:baz)`)).sql).toBe(
     "(LOWER(name) LIKE LOWER(?) AND ((LOWER(bio) LIKE LOWER(?) OR LOWER(bio) LIKE LOWER(?))))"
   ));
+
+test(`empty expression throws (1)`, () =>
+  expect(() => serialize(parse(``)).sql).toThrow("Unexpected EmptyExpression"));
